@@ -141,7 +141,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Format.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Killer.cpp" />
     <ClCompile Include="shutdown.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Format.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Killer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -36,13 +36,19 @@ private:
     }
 
 public:
+    Input() {
 
+    }
 
     void timeStringToInt(string input) {
         this->hours = stoi(input.substr(0, 2));
         this->minutes = stoi(input.substr(3, 2));
         this->seconds = stoi(input.substr(6, 2));
         return;
+    }
+
+    void setDays(int days) {
+        this->days = days;
     }
  
     int typeDaysToAdd() {
@@ -92,23 +98,35 @@ public:
 
 
 
-    string typeTime() {
+    string typeSpecifiedTime() {
         return this->typeString(this->regexTime);
     }
 
-    string typeFullTime() {
+    string typeTimeOut() {
         return this->typeString(this->regexFullTime);
     }
 
-    time_t toTime_t() {
+    time_t createSpecifiedTime() {
         this->timenow = time(NULL);
-        this->datetime = localtime(&timenow);
+        this->datetime = localtime(&this->timenow);
 
         this->datetime->tm_mday += this->days;
         this->datetime->tm_hour = this->hours;
         this->datetime->tm_min = this->minutes;
         this->datetime->tm_sec = this->seconds;
-        
+
+        return mktime(this->datetime);
+    }
+
+    time_t createTimeOut() {
+        this->timenow = time(NULL);
+        this->datetime = localtime(&this->timenow);
+
+        this->datetime->tm_mday += this->days;
+        this->datetime->tm_hour += this->hours;
+        this->datetime->tm_min += this->minutes;
+        this->datetime->tm_sec += this->seconds;
+
         return mktime(this->datetime);
     }
 

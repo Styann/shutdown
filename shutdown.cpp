@@ -18,20 +18,24 @@ int main()
     Input* input = new Input();
     Killer* killer = new Killer();
 
-
-    input->typeDaysToAdd();
+    input->setDays(input->typeDaysToAdd());
     int i = input->typeFromList("specify a time or a timeout (1, 2) ? ", {1, 2});
+    time_t toAdd = NULL;
 
     if (i == 1) {
-        input->timeStringToInt(input->typeTime());
+        input->timeStringToInt(input->typeSpecifiedTime());
+        toAdd = input->createSpecifiedTime();
         cout << "The shutdown is scheduled at " << input->targetTimeToString() << endl;
-        killer->startTimeOut(input->toTime_t());
     }
     else if (i == 2) {
-        input->timeStringToInt(input->typeFullTime());
+        input->timeStringToInt(input->typeTimeOut());
+        toAdd = input->createTimeOut();
+        cout << "The shutdown is scheduled in " << input->targetTimeToString() << endl;
     }
 
-
+    if (toAdd != NULL) {
+        killer->startTimeOut(toAdd);
+    }
     
 
     return 0;
